@@ -1,10 +1,35 @@
 # Zig tracy client
 Easy to use bindings for the tracy client C API.
 
+Fork of https://github.com/neurocyte/zig-tracy (uptades to zig 0.13)
+which is a fork of https://github.com/cipharius/zig-tracy.
+
+## Version 0.11.2-dev (latest as of October 2024)
+I had a painful experience in setting up Tracy. It requires exact
+version match between server and client, and building the server on
+Ubuntu 24.04 wasn't trivial:
+
+- master builds with no issues, but you have to change a build flag to
+enable X11
+- last release 0.11.1 gives compiler errors on gcc 13 `writing 1 byte
+into a region of size 0 overflows`
+- 0.10 (which is the version of this client) had a different build
+system, and the include paths to some font package are set up wrong
+for Ubuntu 24.04
+- 24.04 nix home-manager only had 0.9, and I think it's for Wayland. There
+is an x11-package, but it's in not in the package source yet.
+- Nixos unstable has 0.10, but it fails with cryptic errors. I've
+modified `LD_LIBRARY_PATH` to get past one error, but am stuck at another.
+Running under Wayland.
+
+Hence forking this and updating the CLIENT to match a server I can
+build. The client seems to build for any version without problems.
+
+
 ## Dependencies
 
 * Zig 0.12.0-dev.3437+af0668d6c
-* Tracy 0.10.0 (only for viewing the profiling session, this repository is only concerned with client matters)
+* Tracy `(!)` **0.11.2** `(!)` (only for viewing the profiling session, this repository is only concerned with client matters)
 
 ## Features
 
